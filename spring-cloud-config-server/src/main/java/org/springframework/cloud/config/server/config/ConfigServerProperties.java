@@ -50,7 +50,7 @@ public class ConfigServerProperties {
 	/**
 	 * Extra map for a property source to be sent to all clients unconditionally.
 	 */
-	private Map<String, String> overrides = new LinkedHashMap<String, String>();
+	private Map<String, String> overrides = new LinkedHashMap<>();
 
 	/**
 	 * Flag to indicate that YAML documents that are text or collections (not a map)
