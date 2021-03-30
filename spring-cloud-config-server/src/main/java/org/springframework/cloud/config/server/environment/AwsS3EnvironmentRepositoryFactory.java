@@ -24,7 +24,7 @@ import org.springframework.cloud.config.server.config.ConfigServerProperties;
 public class AwsS3EnvironmentRepositoryFactory
 		implements EnvironmentRepositoryFactory<AwsS3EnvironmentRepository, AwsS3EnvironmentProperties> {
 
-	final private ConfigServerProperties server;
+	private final ConfigServerProperties server;
 
 	public AwsS3EnvironmentRepositoryFactory(ConfigServerProperties server) {
 		this.server = server;
@@ -44,10 +44,7 @@ public class AwsS3EnvironmentRepositoryFactory
 			}
 		}
 		final AmazonS3 client = clientBuilder.build();
-
-		AwsS3EnvironmentRepository repository = new AwsS3EnvironmentRepository(client,
-				environmentProperties.getBucket(), server);
-		return repository;
+		return (new AwsS3EnvironmentRepository(client, environmentProperties.getBucket(), server));
 	}
 
 }
