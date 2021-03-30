@@ -54,7 +54,7 @@ public class EncryptionController {
 
 	private static Log logger = LogFactory.getLog(EncryptionController.class);
 
-	volatile private TextEncryptorLocator encryptorLocator;
+	private final TextEncryptorLocator encryptorLocator;
 
 	private EnvironmentPrefixHelper helper = new EnvironmentPrefixHelper();
 
