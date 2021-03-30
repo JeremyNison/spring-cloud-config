@@ -83,10 +83,10 @@ public class JdbcEnvironmentRepository implements EnvironmentRepository, Ordered
 	@Override
 	public Environment findOne(String application, String profile, String label) {
 		String config = application;
-		if (StringUtils.isEmpty(label)) {
+		if (!StringUtils.hasLength(label)) {
 			label = "master";
 		}
-		if (StringUtils.isEmpty(profile)) {
+		if (!StringUtils.hasLength(profile)) {
 			profile = "default";
 		}
 		if (!profile.startsWith("default")) {

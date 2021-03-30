@@ -43,7 +43,7 @@ public abstract class PathUtils {
 	 * @return {@code true} if the path is invalid, {@code false} otherwise
 	 */
 	public static boolean isInvalidEncodedLocation(String location) {
-		if (StringUtils.isEmpty(location)) {
+		if (!StringUtils.hasLength(location)) {
 			return false;
 		}
 		if (location.contains("%")) {
