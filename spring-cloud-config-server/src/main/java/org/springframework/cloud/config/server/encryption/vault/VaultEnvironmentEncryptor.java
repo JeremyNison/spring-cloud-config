@@ -83,7 +83,7 @@ public class VaultEnvironmentEncryptor implements EnvironmentEncryptor {
 							throw new WrongFormatException(wrongFormat);
 						}
 
-						if (StringUtils.isEmpty(parts[0]) || StringUtils.isEmpty(parts[1])) {
+						if (!(StringUtils.hasLength(parts[0])) || !(StringUtils.hasLength(parts[1]))) {
 							throw new WrongFormatException(wrongFormat);
 						}
 
