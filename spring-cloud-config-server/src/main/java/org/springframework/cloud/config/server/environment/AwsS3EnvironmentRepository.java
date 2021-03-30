@@ -68,11 +68,12 @@ public class AwsS3EnvironmentRepository implements EnvironmentRepository, Ordere
 
 	@Override
 	public Environment findOne(String specifiedApplication, String specifiedProfiles, String specifiedLabel) {
-		final String application = StringUtils.isEmpty(specifiedApplication)
+		final String application = !(StringUtils.hasLength(specifiedApplication))
 				? serverProperties.getDefaultApplicationName() : specifiedApplication;
-		final String profiles = StringUtils.isEmpty(specifiedProfiles) ? serverProperties.getDefaultProfile()
+		final String profiles = !(StringUtils.hasLength(specifiedProfiles)) ? serverProperties.getDefaultProfile()
 				: specifiedProfiles;
-		final String label = StringUtils.isEmpty(specifiedLabel) ? serverProperties.getDefaultLabel() : specifiedLabel;
+		final String label = !(StringUtils.hasLength(specifiedLabel)) ? serverProperties.getDefaultLabel()
+				: specifiedLabel;
 
 		String[] profileArray = parseProfiles(profiles);
 		String[] apps = new String[] { application };
@@ -120,11 +121,11 @@ public class AwsS3EnvironmentRepository implements EnvironmentRepository, Ordere
 
 	private String buildObjectKeyPrefix(String application, String profile, String label) {
 		StringBuilder objectKeyPrefix = new StringBuilder();
-		if (!StringUtils.isEmpty(label)) {
+		if (StringUtils.hasLength(label)) {
 			objectKeyPrefix.append(label).append(PATH_SEPARATOR);
 		}
 		objectKeyPrefix.append(application);
-		if (!StringUtils.isEmpty(profile)) {
+		if (StringUtils.hasLength(profile)) {
 			objectKeyPrefix.append("-").append(profile);
 		}
 		return objectKeyPrefix.toString();

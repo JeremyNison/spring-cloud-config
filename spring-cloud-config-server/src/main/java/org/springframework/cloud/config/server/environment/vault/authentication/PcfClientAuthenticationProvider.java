@@ -67,7 +67,7 @@ public class PcfClientAuthenticationProvider extends SpringVaultClientAuthentica
 
 		String value = System.getenv(name);
 
-		if (StringUtils.isEmpty(value)) {
+		if (!StringUtils.hasLength(value)) {
 			throw new IllegalStateException(String.format("Environment variable %s not set", name));
 		}
 

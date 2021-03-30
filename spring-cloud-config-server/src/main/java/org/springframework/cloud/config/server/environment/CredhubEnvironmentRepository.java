@@ -50,10 +50,10 @@ public class CredhubEnvironmentRepository implements EnvironmentRepository {
 
 	@Override
 	public Environment findOne(String application, String profilesList, String label) {
-		if (StringUtils.isEmpty(profilesList)) {
+		if (!StringUtils.hasLength(profilesList)) {
 			profilesList = DEFAULT_PROFILE;
 		}
-		if (StringUtils.isEmpty(label)) {
+		if (!StringUtils.hasLength(label)) {
 			label = DEFAULT_LABEL;
 		}
 

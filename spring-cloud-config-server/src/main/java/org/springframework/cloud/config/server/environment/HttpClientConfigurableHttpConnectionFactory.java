@@ -144,14 +144,14 @@ public class HttpClientConfigurableHttpConnectionFactory implements Configurable
 		List<String> values = new LinkedList<>();
 		for (String token : tokens) {
 			String[] valueTokens = spec.split(token);
-			if (!StringUtils.isEmpty(valueTokens[0])) {
+			if (StringUtils.hasLength(valueTokens[0])) {
 				values.add(valueTokens[0]);
 			}
 			if (valueTokens.length > 1) {
 				spec = valueTokens[1];
 			}
 		}
-		if (tokens.length == 1 && !StringUtils.isEmpty(spec)) {
+		if (tokens.length == 1 && StringUtils.hasLength(spec)) {
 			values.add(spec);
 		}
 		return values;
