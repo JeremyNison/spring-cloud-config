@@ -53,6 +53,9 @@ public class VaultEnvironmentEncryptor implements EnvironmentEncryptor {
 		Map<String, VaultResponse> loadedVaultKeys = new HashMap<>();
 
 		Environment result = new Environment(environment);
+
+		String wrongFormat = "Wrong format";
+
 		for (PropertySource source : environment.getPropertySources()) {
 			Map<Object, Object> map = new LinkedHashMap<>(source.getSource());
 			for (Map.Entry<Object, Object> entry : new LinkedHashSet<>(map.entrySet())) {
@@ -65,23 +68,23 @@ public class VaultEnvironmentEncryptor implements EnvironmentEncryptor {
 						value = value.substring("{vault}".length());
 
 						if (!value.startsWith(":")) {
-							throw new RuntimeException("Wrong format");
+							throw new WrongFormatException(wrongFormat);
 						}
 
 						value = value.substring(1);
 
 						if (!value.contains("#")) {
-							throw new RuntimeException("Wrong format");
+							throw new WrongFormatException(wrongFormat);
 						}
 
 						String[] parts = value.split("#");
 
 						if (parts.length == 1) {
-							throw new RuntimeException("Wrong format");
+							throw new WrongFormatException(wrongFormat);
 						}
 
 						if (StringUtils.isEmpty(parts[0]) || StringUtils.isEmpty(parts[1])) {
-							throw new RuntimeException("Wrong format");
+							throw new WrongFormatException(wrongFormat);
 						}
 
 						String vaultKey = parts[0];
@@ -119,6 +122,20 @@ public class VaultEnvironmentEncryptor implements EnvironmentEncryptor {
 			result.add(new PropertySource(source.getName(), map));
 		}
 		return result;
+	}
+
+}
+
+class WrongFormatException extends RuntimeException {
+
+	private static final long serialVersionUID = -7519142540150052874L;
+
+	WrongFormatException() {
+		super();
+	}
+
+	WrongFormatException(String s) {
+		super(s);
 	}
 
 }
