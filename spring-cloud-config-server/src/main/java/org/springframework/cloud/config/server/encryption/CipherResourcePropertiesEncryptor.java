@@ -57,13 +57,13 @@ public class CipherResourcePropertiesEncryptor extends AbstractCipherResourceEnc
 
 		for (Object value : properties.values()) {
 			String valueStr = value.toString();
-			if (valueStr.startsWith(CIPHER_MARKER)) {
+			if (valueStr.startsWith(cipher_maker)) {
 				valsToDecrpyt.add(valueStr);
 			}
 		}
 
 		for (String value : valsToDecrpyt) {
-			String decryptedValue = decryptValue(value.replace(CIPHER_MARKER, ""), environment.getName(),
+			String decryptedValue = decryptValue(value.replace(cipher_maker, ""), environment.getName(),
 					environment.getProfiles());
 			text = text.replace(value, decryptedValue);
 		}
