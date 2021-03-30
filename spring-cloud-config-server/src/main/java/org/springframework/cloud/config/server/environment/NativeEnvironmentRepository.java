@@ -151,7 +151,7 @@ public class NativeEnvironmentRepository implements EnvironmentRepository, Searc
 		if (this.searchLocations == null || this.searchLocations.length == 0) {
 			locations = DEFAULT_LOCATIONS;
 		}
-		Collection<String> output = new LinkedHashSet<String>();
+		Collection<String> output = new LinkedHashSet<>();
 
 		if (label == null) {
 			label = this.defaultLabel;

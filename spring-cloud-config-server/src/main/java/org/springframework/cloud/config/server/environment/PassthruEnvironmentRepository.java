@@ -45,7 +45,7 @@ public class PassthruEnvironmentRepository implements EnvironmentRepository {
 
 	private static final String DEFAULT_LABEL = "master";
 
-	private Set<String> standardSources = new HashSet<String>(
+	private Set<String> standardSources = new HashSet<>(
 			Arrays.asList("vcap", StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME,
 					StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME,
 					StandardServletEnvironment.JNDI_PROPERTY_SOURCE_NAME,
