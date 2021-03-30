@@ -48,9 +48,6 @@ abstract class AbstractCipherResourceEncryptor implements ResourceEncryptor {
 	}
 
 	@Override
-	public abstract List<String> getSupportedExtensions();
-
-	@Override
 	public abstract String decrypt(String text, Environment environment) throws IOException;
 
 	protected String decryptWithJacksonParser(String text, String name, String[] profiles, JsonFactory factory)
