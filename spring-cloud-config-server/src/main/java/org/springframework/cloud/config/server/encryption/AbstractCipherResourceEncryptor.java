@@ -18,14 +18,12 @@ package org.springframework.cloud.config.server.encryption;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 
-import org.springframework.cloud.config.environment.Environment;
 import org.springframework.util.StringUtils;
 
 /**
