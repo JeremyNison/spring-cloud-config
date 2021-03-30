@@ -178,19 +178,17 @@ public class EncryptionController {
 			}
 			String candidate = data.substring(0, data.length() - 1);
 			if (cipher) {
-				if (data.endsWith("=")) {
-					if (data.length() / 2 != (data.length() + 1) / 2) {
+				if (data.endsWith("=") && data.length() / 2 != (data.length() + 1) / 2) {
+					try {
+						Hex.decode(candidate);
+						return candidate;
+					}
+					catch (IllegalArgumentException e) {
 						try {
-							Hex.decode(candidate);
+							Base64Utils.decode(candidate.getBytes());
 							return candidate;
 						}
-						catch (IllegalArgumentException e) {
-							try {
-								Base64Utils.decode(candidate.getBytes());
-								return candidate;
-							}
-							catch (IllegalArgumentException ex) {
-							}
+						catch (IllegalArgumentException ex) {
 						}
 					}
 				}
