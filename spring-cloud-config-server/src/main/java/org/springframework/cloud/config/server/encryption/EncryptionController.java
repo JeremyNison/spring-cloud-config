@@ -62,6 +62,10 @@ public class EncryptionController {
 
 	private String defaultProfile = "default";
 
+	private String status = "status";
+
+	private String description = "description";
+
 	public EncryptionController(TextEncryptorLocator encryptorLocator) {
 		this.encryptorLocator = encryptorLocator;
 	}
@@ -92,7 +96,7 @@ public class EncryptionController {
 	public Map<String, Object> status() {
 		TextEncryptor encryptor = getEncryptor(defaultApplicationName, defaultProfile, "");
 		validateEncryptionWeakness(encryptor);
-		return Collections.singletonMap("status", "OK");
+		return Collections.singletonMap(status, "OK");
 	}
 
 	@PostMapping(path = "encrypt")
@@ -203,48 +207,48 @@ public class EncryptionController {
 	@ExceptionHandler(KeyFormatException.class)
 	public ResponseEntity<Map<String, Object>> keyFormat() {
 		Map<String, Object> body = new HashMap<>();
-		body.put("status", "BAD_REQUEST");
-		body.put("description", "Key data not in correct format (PEM or jks keystore)");
+		body.put(status, "BAD_REQUEST");
+		body.put(description, "Key data not in correct format (PEM or jks keystore)");
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(KeyNotAvailableException.class)
 	public ResponseEntity<Map<String, Object>> keyUnavailable() {
 		Map<String, Object> body = new HashMap<>();
-		body.put("status", "NOT_FOUND");
-		body.put("description", "No public key available");
+		body.put(status, "NOT_FOUND");
+		body.put(description, "No public key available");
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(DecryptionNotSupportedException.class)
 	public ResponseEntity<Map<String, Object>> decryptionDisabled() {
 		Map<String, Object> body = new HashMap<>();
-		body.put("status", "BAD_REQUEST");
-		body.put("description", "Server-side decryption is not supported");
+		body.put(status, "BAD_REQUEST");
+		body.put(description, "Server-side decryption is not supported");
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(KeyNotInstalledException.class)
 	public ResponseEntity<Map<String, Object>> notInstalled() {
 		Map<String, Object> body = new HashMap<>();
-		body.put("status", "NO_KEY");
-		body.put("description", "No key was installed for encryption service");
+		body.put(status, "NO_KEY");
+		body.put(description, "No key was installed for encryption service");
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(EncryptionTooWeakException.class)
 	public ResponseEntity<Map<String, Object>> encryptionTooWeak() {
 		Map<String, Object> body = new HashMap<>();
-		body.put("status", "INVALID");
-		body.put("description", "The encryption algorithm is not strong enough");
+		body.put(status, "INVALID");
+		body.put(description, "The encryption algorithm is not strong enough");
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 
 	@ExceptionHandler(InvalidCipherException.class)
 	public ResponseEntity<Map<String, Object>> invalidCipher() {
 		Map<String, Object> body = new HashMap<>();
-		body.put("status", "INVALID");
-		body.put("description", "Text not encrypted with this key");
+		body.put(status, "INVALID");
+		body.put(description, "Text not encrypted with this key");
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 
