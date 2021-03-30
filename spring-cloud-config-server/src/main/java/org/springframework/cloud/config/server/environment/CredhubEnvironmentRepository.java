@@ -36,6 +36,8 @@ public class CredhubEnvironmentRepository implements EnvironmentRepository {
 
 	private CredHubOperations credHubOperations;
 
+	private String delimiter = "/";
+
 	private static final String DEFAULT_PROFILE = "default";
 
 	private static final String DEFAULT_LABEL = "master";
@@ -87,7 +89,7 @@ public class CredhubEnvironmentRepository implements EnvironmentRepository {
 	}
 
 	private Map<Object, Object> findProperties(String application, String profile, String label) {
-		String path = "/" + application + "/" + profile + "/" + label;
+		String path = delimiter + application + delimiter + profile + delimiter + label;
 
 		return this.credHubOperations.credentials().findByPath(path).stream()
 				.map(credentialSummary -> credentialSummary.getName().getName())
