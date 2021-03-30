@@ -47,9 +47,6 @@ abstract class AbstractCipherResourceEncryptor implements ResourceEncryptor {
 		this.encryptor = encryptor;
 	}
 
-	@Override
-	public abstract String decrypt(String text, Environment environment) throws IOException;
-
 	protected String decryptWithJacksonParser(String text, String name, String[] profiles, JsonFactory factory)
 			throws IOException {
 		Set<String> valsToDecrpyt = new HashSet<>();
