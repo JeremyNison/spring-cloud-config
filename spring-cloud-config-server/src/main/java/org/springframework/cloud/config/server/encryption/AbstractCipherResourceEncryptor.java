@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
  */
 abstract class AbstractCipherResourceEncryptor implements ResourceEncryptor {
 
-	protected final String CIPHER_MARKER = "{cipher}";
+	protected final static String CIPHER_MARKER = "{cipher}";
 
 	private final TextEncryptorLocator encryptor;
 
