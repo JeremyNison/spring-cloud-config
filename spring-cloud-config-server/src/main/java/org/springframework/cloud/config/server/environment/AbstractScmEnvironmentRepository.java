@@ -33,11 +33,11 @@ public abstract class AbstractScmEnvironmentRepository extends AbstractScmAccess
 
 	private int order = Ordered.LOWEST_PRECEDENCE;
 
-	public AbstractScmEnvironmentRepository(ConfigurableEnvironment environment) {
+	protected AbstractScmEnvironmentRepository(ConfigurableEnvironment environment) {
 		super(environment);
 	}
 
-	public AbstractScmEnvironmentRepository(ConfigurableEnvironment environment,
+	protected AbstractScmEnvironmentRepository(ConfigurableEnvironment environment,
 			AbstractScmAccessorProperties properties) {
 		super(environment, properties);
 		this.order = properties.getOrder();
