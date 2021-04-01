@@ -148,6 +148,12 @@ public class JGitEnvironmentRepository extends AbstractScmEnvironmentRepository
 	 */
 	private boolean skipSslValidation;
 
+	private String rmt = "remote";
+
+	private String origin = "origin";
+
+	private String url = "url";
+
 	public JGitEnvironmentRepository(ConfigurableEnvironment environment, JGitEnvironmentProperties properties) {
 		super(environment, properties);
 		this.cloneOnStart = properties.isCloneOnStart();
@@ -440,7 +446,7 @@ public class JGitEnvironmentRepository extends AbstractScmEnvironmentRepository
 		}
 
 		boolean isWorkingTreeClean = gitStatus.isClean();
-		String originUrl = git.getRepository().getConfig().getString("remote", "origin", "url");
+		String originUrl = git.getRepository().getConfig().getString(rmt, origin, url);
 
 		if (this.forcePull && !isWorkingTreeClean) {
 			shouldPull = true;
@@ -494,7 +500,7 @@ public class JGitEnvironmentRepository extends AbstractScmEnvironmentRepository
 
 	protected FetchResult fetch(Git git, String label) {
 		FetchCommand fetch = git.fetch();
-		fetch.setRemote("origin");
+		fetch.setRemote(origin);
 		fetch.setTagOpt(TagOpt.FETCH_TAGS);
 		fetch.setRemoveDeletedRefs(this.deleteUntrackedBranches);
 		if (this.refreshRate > 0) {
@@ -512,7 +518,7 @@ public class JGitEnvironmentRepository extends AbstractScmEnvironmentRepository
 		}
 		catch (Exception ex) {
 			String message = "Could not fetch remote for " + label + " remote: "
-					+ git.getRepository().getConfig().getString("remote", "origin", "url");
+					+ git.getRepository().getConfig().getString(rmt, origin, url);
 			warn(message, ex);
 			return null;
 		}
@@ -530,7 +536,7 @@ public class JGitEnvironmentRepository extends AbstractScmEnvironmentRepository
 		}
 		catch (Exception ex) {
 			String message = "Could not merge remote for " + label + " remote: "
-					+ git.getRepository().getConfig().getString("remote", "origin", "url");
+					+ git.getRepository().getConfig().getString(rmt, origin, url);
 			warn(message, ex);
 			return null;
 		}
@@ -549,7 +555,7 @@ public class JGitEnvironmentRepository extends AbstractScmEnvironmentRepository
 		}
 		catch (Exception ex) {
 			String message = "Could not reset to remote for " + label + " (current ref=" + ref + "), remote: "
-					+ git.getRepository().getConfig().getString("remote", "origin", "url");
+					+ git.getRepository().getConfig().getString(rmt, origin, url);
 			warn(message, ex);
 			return null;
 		}
