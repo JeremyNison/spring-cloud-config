@@ -70,10 +70,9 @@ public class ConfigServerBootstrapApplicationListener
 	@Override
 	public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
 		ConfigurableEnvironment environment = event.getEnvironment();
-		if (!environment.resolvePlaceholders("${spring.cloud.config.enabled:false}").equalsIgnoreCase("true")) {
-			if (!environment.getPropertySources().contains(this.propertySource.getName())) {
-				environment.getPropertySources().addLast(this.propertySource);
-			}
+		if (!environment.resolvePlaceholders("${spring.cloud.config.enabled:false}").equalsIgnoreCase("true")
+				&& !environment.getPropertySources().contains(this.propertySource.getName())) {
+			environment.getPropertySources().addLast(this.propertySource);
 		}
 	}
 
